@@ -37,7 +37,7 @@ class EditableOption extends DataObject {
 	 * @return boolean
 	 */
 	public function canEdit($member = null) {
-		return ($this->Parent()->canEdit($member));
+		return $this->Parent()->canEdit($member);
 	}
 
 	/**
@@ -46,7 +46,26 @@ class EditableOption extends DataObject {
 	 * @return boolean
 	 */
 	public function canDelete($member = null) {
-		return ($this->Parent()->canDelete($member));
+		return $this->Parent()->canDelete($member);
+	}
+
+	/**
+	 * @param Member $member
+	 *
+	 * @return boolean
+	 */
+	public function canCreate($member = null) {
+		// use UserDefinedForm->canEdit() because creating a DataObject for the page is kind of an edit
+		return $this->Parent()->canEdit($member);
+	}
+
+	/**
+	 * @param Member $member
+	 *
+	 * @return boolean
+	 */
+	public function canView($member = null) {
+		return $this->Parent()->canView($member);
 	}
 
 	public function getEscapedTitle() {

@@ -270,7 +270,8 @@ class UserDefinedForm_EmailRecipient extends DataObject {
 	 * @return boolean
 	 */
 	public function canCreate($member = null) {
-		return $this->Form()->canCreate();
+		// use UserDefinedForm->canEdit() because creating a DataObject for the page is kind of an edit
+		return $this->Form()->canEdit();
 	}
 
 	/**

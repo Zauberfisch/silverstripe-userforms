@@ -338,11 +338,36 @@ class EditableFormField extends DataObject {
 	 * Return whether a user can edit this form field
 	 * based on whether they can edit the page
 	 *
+	 * @param Member $member
+	 *
 	 * @return bool
 	 */
 	public function canEdit($member = null) {
 		if($this->Parent()) {
 			return $this->Parent()->canEdit($member) && !$this->isReadonly();
+		}
+
+		return true;
+	}
+
+	/**
+	 * @param Member $member
+	 *
+	 * @return boolean
+	 */
+	public function canCreate($member = null) {
+        // use UserDefinedForm->canEdit() because creating a DataObject for the page is kind of an edit
+		return $this->canEdit($member);
+	}
+
+	/**
+	 * @param Member $member
+	 *
+	 * @return boolean
+	 */
+	public function canView($member = null) {
+		if ($this->Parent()) {
+			return $this->Parent()->canView($member);
 		}
 
 		return true;

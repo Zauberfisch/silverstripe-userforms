@@ -83,7 +83,8 @@ class SubmittedForm extends DataObject {
 	 * @return boolean
 	 */
 	public function canCreate($member = null) {
-		return $this->Parent()->canCreate();
+		// use UserDefinedForm->canEdit() because creating a DataObject for the page is kind of an edit
+		return $this->Parent()->canEdit();
 	}
 
 	/**
